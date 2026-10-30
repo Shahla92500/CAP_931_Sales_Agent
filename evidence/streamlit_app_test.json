@@ -1,0 +1,23 @@
+{
+  "tool": "Streamlit AppTest",
+  "mode": "offline fictional demo",
+  "exception_count": 0,
+  "input_labels": [
+    "Product name",
+    "Prospective company URL",
+    "Product category",
+    "Target customer name",
+    "OpenAI model",
+    "OpenAI API key",
+    "Competitor URLs \u2014 one per line",
+    "Value proposition"
+  ],
+  "visible_markdown": [
+    "Research a prospective company and prepare a source-linked briefing for the next sales conversation.",
+    "# Northstar Systems | Sales meeting briefing\n**FICTIONAL OFFLINE DEMO** \u00b7 2026-10-30T01:16:59+00:00\nProduct: PipelinePilot | Category: Sales workflow software | Target: Maya Chen\n\n## Company strategy\n- **Fact**: The fictional company describes inventory software for regional retailers and growth through channel partners. [S1]\n\n## Competitor information\n- **Fact**: HarborCRM advertises automated sales follow-up. No supplied evidence establishes that Northstar uses this competing product. [S3]\n\n## Leadership\n- **Fact**: The fictional leadership fixture lists Maya Chen as CEO. No real executive identity was researched. [S2]\n\n## Product and annual report strategy\n- **Unknown**: No annual report or 10-K exists for this fictional company. The fixture cannot establish a real product roadmap. \n\n## Sales opportunity hypotheses\n- **Hypothesis**: PipelinePilot may help organize partner follow-up if Northstar confirms that manual coordination is a problem. The value proposition remains a seller claim. \n\n## Meeting questions\n- How is partner follow-up managed today?\n- Which handoffs cause missed opportunities?\n- What evidence would justify a pilot?\n\n## Limitations\n- Fictional demonstration only. No website research or LLM call occurred.\n- Budget, systems, buying intent and independent validation are unknown.\n\n## Supporting sources\n- [S1] [Fictional Northstar company profile](https://northstar.example/about) \u00b7 accessed 2026-10-30T01:16:59+00:00\n- [S2] [Fictional Northstar leadership](https://northstar.example/leadership) \u00b7 accessed 2026-10-30T01:16:59+00:00\n- [S3] [Fictional HarborCRM positioning](https://harborcrm.example/product) \u00b7 accessed 2026-10-30T01:16:59+00:00",
+    "FICTIONAL TEST FIXTURE. S1: Northstar Systems sells inventory software to regional retailers and describes expansion through channel partners. S2: Its leadership page lists Maya Chen as CEO. S3: HarborCRM advertises automated sales follow-up. There is no evidence that Northstar uses HarborCRM. Northstar is fictional and no annual filing exists. No independent evidence, sales budget, CRM, headcount, pricing comparison or buying intent is supplied."
+  ],
+  "warnings": [
+    "FICTIONAL OFFLINE DEMO \u2014 this is a fixed test fixture, not an LLM-generated or researched report."
+  ]
+}

@@ -1,0 +1,6 @@
+[project]
+name = "cap-931-sales-agent"
+version = "1.0.0"
+description = "Source-grounded sales meeting preparation in Streamlit"
+requires-python = ">=3.11,<3.15"
+dependencies = ["streamlit>=1.45,<2", "openai>=2,<3", "pydantic>=2,<3", "reportlab>=4,<5", "python-dotenv>=1,<2"]

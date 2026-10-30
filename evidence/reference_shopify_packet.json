@@ -1,0 +1,112 @@
+{
+  "inputs": {
+    "product_name": "DataBridge (assumed product)",
+    "company_url": "https://www.shopify.com/",
+    "product_category": "Cloud data platform",
+    "competitor_urls": [
+      "https://www.databricks.com/"
+    ],
+    "value_proposition": "Assumed seller proposition: unify governed business data and reduce manual pipeline work.",
+    "target_customer": "Tobi Lutke"
+  },
+  "evidence": {
+    "notes": "Manually curated public-source evidence from the current assistant research session. S1 describes merchant growth, platform innovation and partner ecosystem expansion, and identifies scalability challenges associated with growing data and request volumes. S2 identifies Tobi Lutke as CEO. S3 describes a beta connector for ingesting Shopify commerce data into Databricks; this does not establish Shopify Inc as a Databricks customer. No current job posting or executive quotation was verified in this bounded sample.",
+    "sources": [
+      {
+        "id": "S1",
+        "title": "Shopify 2025 Form 10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000007/shop-20251231.htm",
+        "retrieved_at": "2026-10-30T01:22:32+00:00"
+      },
+      {
+        "id": "S2",
+        "title": "Shopify board and CEO biography",
+        "url": "https://www.shopify.com/investors/board-of-directors",
+        "retrieved_at": "2026-10-30T01:22:32+00:00"
+      },
+      {
+        "id": "S3",
+        "title": "Databricks Shopify connector documentation",
+        "url": "https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/shopify",
+        "retrieved_at": "2026-10-30T01:22:32+00:00"
+      }
+    ],
+    "response_id": "current-assistant-research-not-app-api",
+    "model": "Current conversation assistant; separate authoring workflow",
+    "retrieved_at": "2026-10-30T01:22:32+00:00",
+    "mode": "reference"
+  },
+  "briefing": {
+    "company_name": "Shopify",
+    "inferred_category": "Cloud data platform",
+    "strategy": [
+      {
+        "text": "The 2025 annual filing emphasizes merchant growth, platform innovation and a broader partner ecosystem.",
+        "kind": "fact",
+        "source_ids": [
+          "S1"
+        ]
+      }
+    ],
+    "competitors": [
+      {
+        "text": "Databricks documents a beta Shopify connector for commerce-data ingestion. This establishes connector availability, not a verified purchase by Shopify Inc.",
+        "kind": "fact",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "text": "A current vendor relationship between Shopify Inc. and Databricks is not established by this source packet.",
+        "kind": "unknown",
+        "source_ids": []
+      }
+    ],
+    "leadership": [
+      {
+        "text": "Shopify identifies Tobi Lutke as CEO. His relevance is strategic sponsorship; direct ownership of a data-platform procurement is unverified.",
+        "kind": "fact",
+        "source_ids": [
+          "S2"
+        ]
+      }
+    ],
+    "product_strategy": [
+      {
+        "text": "The 2025 filing identifies scalability and operational challenges as transaction data and request volumes grow. This supports a discovery discussion about reliability rather than a claim of unmet demand.",
+        "kind": "fact",
+        "source_ids": [
+          "S1"
+        ]
+      }
+    ],
+    "sales_fit": [
+      {
+        "text": "DataBridge could be positioned around governed data and pipeline reliability if an operational sponsor confirms a measurable gap. This is an assumed seller proposition, not an established buying signal.",
+        "kind": "hypothesis",
+        "source_ids": []
+      }
+    ],
+    "meeting_questions": [
+      "Which data reliability or governance outcomes are priorities?",
+      "Which incumbent platforms are in use, and where do gaps remain?",
+      "Who owns evaluation criteria and any pilot decision?"
+    ],
+    "limitations": [
+      "Reference authored by the current assistant from three public sources; the app live API was not executed.",
+      "No current vacancy, recent executive quote, procurement budget or buying intent was verified."
+    ]
+  },
+  "metadata": {
+    "mode": "reference",
+    "model": "Current conversation assistant; separate authoring workflow",
+    "generated_at": "2026-10-30T01:22:32+00:00",
+    "response_id": "current-assistant-research-not-app-api",
+    "prompt_version": "manual-assistant-reference",
+    "words": 188,
+    "factual_claims": 4,
+    "cited_factual_claims": 4,
+    "unknown_items": 1,
+    "citation_check": "Source IDs valid; factual support still needs manual review"
+  }
+}

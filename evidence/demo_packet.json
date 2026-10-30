@@ -1,0 +1,105 @@
+{
+  "inputs": {
+    "product_name": "PipelinePilot",
+    "company_url": "https://northstar.example",
+    "product_category": "Sales workflow software",
+    "competitor_urls": [
+      "https://harborcrm.example"
+    ],
+    "value_proposition": "Reduce manual follow-up and keep sales activity visible in one place.",
+    "target_customer": "Maya Chen"
+  },
+  "evidence": {
+    "notes": "FICTIONAL TEST FIXTURE. S1: Northstar Systems sells inventory software to regional retailers and describes expansion through channel partners. S2: Its leadership page lists Maya Chen as CEO. S3: HarborCRM advertises automated sales follow-up. There is no evidence that Northstar uses HarborCRM. Northstar is fictional and no annual filing exists. No independent evidence, sales budget, CRM, headcount, pricing comparison or buying intent is supplied.",
+    "sources": [
+      {
+        "id": "S1",
+        "title": "Fictional Northstar company profile",
+        "url": "https://northstar.example/about",
+        "retrieved_at": "2026-10-30T01:16:58+00:00"
+      },
+      {
+        "id": "S2",
+        "title": "Fictional Northstar leadership",
+        "url": "https://northstar.example/leadership",
+        "retrieved_at": "2026-10-30T01:16:58+00:00"
+      },
+      {
+        "id": "S3",
+        "title": "Fictional HarborCRM positioning",
+        "url": "https://harborcrm.example/product",
+        "retrieved_at": "2026-10-30T01:16:58+00:00"
+      }
+    ],
+    "response_id": "offline-fixture",
+    "model": "none",
+    "retrieved_at": "2026-10-30T01:16:58+00:00",
+    "mode": "demo"
+  },
+  "briefing": {
+    "company_name": "Northstar Systems",
+    "inferred_category": "Sales workflow software",
+    "strategy": [
+      {
+        "text": "The fictional company describes inventory software for regional retailers and growth through channel partners.",
+        "kind": "fact",
+        "source_ids": [
+          "S1"
+        ]
+      }
+    ],
+    "competitors": [
+      {
+        "text": "HarborCRM advertises automated sales follow-up. No supplied evidence establishes that Northstar uses this competing product.",
+        "kind": "fact",
+        "source_ids": [
+          "S3"
+        ]
+      }
+    ],
+    "leadership": [
+      {
+        "text": "The fictional leadership fixture lists Maya Chen as CEO. No real executive identity was researched.",
+        "kind": "fact",
+        "source_ids": [
+          "S2"
+        ]
+      }
+    ],
+    "product_strategy": [
+      {
+        "text": "No annual report or 10-K exists for this fictional company. The fixture cannot establish a real product roadmap.",
+        "kind": "unknown",
+        "source_ids": []
+      }
+    ],
+    "sales_fit": [
+      {
+        "text": "PipelinePilot may help organize partner follow-up if Northstar confirms that manual coordination is a problem. The value proposition remains a seller claim.",
+        "kind": "hypothesis",
+        "source_ids": []
+      }
+    ],
+    "meeting_questions": [
+      "How is partner follow-up managed today?",
+      "Which handoffs cause missed opportunities?",
+      "What evidence would justify a pilot?"
+    ],
+    "limitations": [
+      "Fictional demonstration only. No website research or LLM call occurred.",
+      "Budget, systems, buying intent and independent validation are unknown."
+    ]
+  },
+  "metadata": {
+    "mode": "demo",
+    "model": "none",
+    "response_id": "offline-fixture",
+    "prompt_version": "fixture",
+    "generated_at": "2026-10-30T01:16:58+00:00",
+    "words": 125,
+    "factual_claims": 3,
+    "cited_factual_claims": 3,
+    "unknown_items": 1,
+    "citation_check": "Source IDs valid; factual support still needs manual review"
+  }
+}
