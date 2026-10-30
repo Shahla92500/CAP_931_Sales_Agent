@@ -1,83 +1,160 @@
-# CAP 931 Sales Research Agent
+# CAP 931 Sales Assistant Agent
 
-A Streamlit application for researching prospective companies and preparing source-linked sales meeting briefings.
+A Python and Streamlit prototype that helps sales representatives prepare for meetings with prospective customers.
 
-## Start on macOS with uv
+The application collects product and account information and includes a GPT-powered workflow for researching public sources and producing a one-page sales briefing.
 
-Open this folder in VS Code, then run in its terminal:
+## Project status
+
+- The Streamlit interface runs locally.
+- Offline demo mode generates a briefing and PDF without an API key.
+- Live research and prompt-comparison workflows are implemented.
+- Live GPT execution has not been verified because an OpenAI API key was unavailable.
+- The application has not been deployed publicly.
+
+## Installation and launch
+
+Python 3.12 and uv are recommended.
+
+Open a terminal in the project folder containing `pyproject.toml`, then run:
 
 ```bash
 uv sync
-uv run streamlit run app.py
+uv run streamlit run src/cap_931/app.py
 ```
 
-Open the Local URL printed by Streamlit, usually http://localhost:8501.
+Open the Local URL displayed in the terminal, usually:
 
-The default **Demo** mode needs no API key. Click **Generate briefing** with the fixed sample inputs. The company, executive, competing vendor, and sources are fictional fixtures. Demo runs no web research or LLM call.
+http://localhost:8501
+
+## Application inputs
+
+| Input | Purpose |
+| --- | --- |
+| Product name | Identifies the product being sold |
+| Company URL | Identifies the prospective account |
+| Product category | Describes the product category for normalization by the model |
+| Competitor URLs | Identifies up to three competing vendors or products the prospect might use |
+| Value proposition | Describes the seller's proposed benefit |
+| Target customer name | Identifies the person being approached |
+
+## Demo mode
+
+Select **Demo — no API key** and click **Generate briefing** with the supplied inputs unchanged.
+
+Demo mode uses a fixed fictional company, executive, competitor, and source packet. It demonstrates the interface, report structure, validation, and PDF export.
+
+It does not perform website research or call an LLM.
 
 ## Live research
 
-Select **Live research**, enter the six inputs, and enter an OpenAI API key in the password field. An environment variable can also supply it:
+Select **Live research**, complete the required inputs, and enter an OpenAI API key in the password field.
 
-1. Copy `.env.example` to `.env`.
-2. Put the API key in `.env` locally.
-3. Keep `.env` out of Git; it is already excluded by `.gitignore`.
+Alternatively, copy `.env.example` to `.env` and configure:
 
-The default model is `gpt-4.1-mini`; change it only to a model that supports Responses API web search and structured output. API billing and model availability depend on the account. No key is included in this package. Never paste a key into a report or screenshot.
+```env
+OPENAI_API_KEY=replace_with_a_local_key
+OPENAI_MODEL=gpt-4.1-mini
+```
 
-Inputs:
-- Product name: the product being sold.
-- Prospective company URL: the company being researched.
-- Product category: the seller's category.
-- Competitor URLs: competing vendors/products the prospect might use, one per line, up to three.
-- Value proposition: seller-provided benefit statement.
-- Target customer: name of the person being approached.
+The `.env` file is excluded from Git. API keys must not appear in source code, screenshots, or submitted documents.
 
-The model normalizes the product category and researches the target person only in a public professional context. It also searches recent executive statements, job postings, and annual filings, flagging missing information. A hostname-derived company ID is included in live metadata.
+The default model is `gpt-4.1-mini`. Live operation requires API access to a model supporting Responses API web search and structured output. API charges and model access depend on the account.
 
-The app first calls web search, extracts cited source metadata and evidence notes, then generates a structured briefing. The briefing separates facts, hypotheses, and unknowns. It downloads as a one-page PDF, Markdown, or a JSON evidence packet. PDF creation fails visibly rather than silently truncating an overlong briefing.
+## Research and report workflow
 
-## Prompt experiments
+1. Validate the required inputs and website URLs.
+2. Research public company pages, competitor mentions, leadership, relevant job postings, and annual filings.
+3. Extract cited source URLs and organize the research evidence.
+4. Generate a structured briefing using the evidence and sales context.
+5. Validate report sections, source references, and length.
+6. Export the briefing and supporting evidence.
 
-After a live briefing, click **Run prompt comparison**. It makes two additional model calls using baseline and improved prompts against the same evidence. Download the experiment log. Compare word counts, source reference validity, relevance, and factual support by opening the sources. Citation validation checks references, not factual truth. No measured live improvement is claimed in the included report.
+The research prompts distinguish a competitor mention or integration from evidence that the prospect currently uses that vendor.
 
-## Project files
+## Briefing contents
 
-- `app.py`: Streamlit form, state, errors, downloads and experiment controls.
-- `sales_agent/models.py`: data models, input and citation validation.
-- `sales_agent/prompts.py`: research, baseline and improved prompts.
-- `sales_agent/service.py`: OpenAI research and synthesis integration.
-- `sales_agent/export.py`: Markdown and one-page PDF export.
-- `sales_agent/demo.py`: explicitly fictional offline fixture.
-- `tests/test_app.py`: input, citation, PDF, mock integration and Streamlit tests.
-- `docs/`: technical report, prompt notes and sample briefing.
-- `evidence/`: test logs and actual UI screenshot when available.
+The one-page PDF includes:
 
-## Included samples
+- Company strategy.
+- Competitor information.
+- Relevant leadership.
+- Product and annual report strategy.
+- Sales opportunity hypotheses.
+- Meeting questions.
+- Limitations and supporting source links.
 
-`docs/Sample_Briefing.pdf` is a fictional fixture generated by the app export pipeline. `docs/Reference_Shopify_Briefing.pdf` is a separate assistant-authored reference using verified Shopify, SEC and Databricks sources. Its evidence packet is included. The reference sample was not generated by a live call from the application and must not be described as proof of API integration.
+Claims are labeled as facts, hypotheses, or unknowns. Missing information should remain unknown rather than be invented.
 
-## Verification
+Download options include PDF, Markdown, and an evidence JSON file.
 
-Run the core tests in a normal project environment:
+## Prompt engineering
+
+The application uses prompt chaining:
+
+- **Research prompt:** gathers business evidence and identifies gaps.
+- **Synthesis prompt:** converts that evidence into a concise briefing.
+
+Baseline and improved synthesis prompts are included in `src/cap_931/prompts.py`. The improved version adds instructions about identity verification, evidence dates, competitor relationships, and meeting relevance.
+
+After generating a live briefing, **Run prompt comparison** compares both versions against the same research packet. The experiment log records outputs, metadata, validation results, and failures.
+
+No measured improvement in live model performance is claimed before this experiment is executed.
+
+## Project structure
+
+```text
+CAP_931_Sales_Agent/
+├── pyproject.toml
+├── uv.lock
+├── README.md
+├── .env.example
+├── docs/
+├── evidence/
+├── tests/
+│   └── test_app.py
+└── src/
+    └── cap_931/
+        ├── __init__.py
+        ├── app.py
+        ├── models.py
+        ├── prompts.py
+        ├── service.py
+        ├── export.py
+        └── demo.py
+```
+
+## Testing
+
+Run the automated tests from the project root:
 
 ```bash
 uv run --with pypdf python -m unittest discover -s tests -v
 ```
 
-Mock API tests check request construction and response handling without spending credits. They do not establish that live API calls succeed. See the technical report for the actual execution status.
+Tests cover input validation, citation checks, PDF generation, mocked API integration, and Streamlit interaction.
 
-## Limits
+Mocked API tests verify application behavior without making paid requests. They do not demonstrate successful live API execution. Tests must be rerun after changes to the package structure.
 
-Public website research may miss JavaScript-only pages, blocked pages, paywalls or recent changes. A retrieval timestamp does not establish the publication date of a claim. Leadership requires review before a real meeting. This app does not scrape private systems, send sales messages or update a CRM. Retrieved website instructions are treated as untrusted data. Source identity checks cannot establish factual entailment.
+## Documentation and examples
 
-## Submission
+- `docs/CAP_931_Technical_Report.docx`: architecture, implementation decisions, testing, limitations, and proposed enhancements.
+- `docs/Prompts.md`: prompt versions and evaluation approach.
+- `docs/Sample_Briefing.pdf`: fictional offline demonstration.
+- `docs/Reference_Shopify_Briefing.pdf`: separately authored reference brief using public sources.
+- `evidence/`: available test logs and research packets.
 
-The assignment requests a working application, a sample generated briefing, prompt experiments and technical documentation. This package includes implementation and offline verification. A live API run and baseline-versus-improved outputs are still needed for complete live-model evidence. The linked Per Scholas Google Docs template could not be retrieved; the Word report is organized around the assignment's requested topics and can be copied into that template.
+The Shopify reference brief was not generated through the application's live API workflow.
 
-## Technical references
+## Limitations and future improvements
 
-- https://developers.openai.com/api/docs/guides/tools-web-search
-- https://developers.openai.com/api/docs/guides/structured-outputs
-- https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest
-- https://docs.streamlit.io/develop/api-reference/widgets/st.download_button
+Website coverage may be incomplete because of blocked pages, paywalls, search limitations, or recent changes. Valid source references do not prove that every claim is supported; source review remains necessary.
+
+Proposed enhancements include document uploads, scheduled research alerts, authentication, and production deployment. These features are not currently implemented.
+
+## References
+
+- [OpenAI web search](https://developers.openai.com/api/docs/guides/tools-web-search)
+- [OpenAI structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
+- [Streamlit application testing](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest)
+- [Streamlit downloads](https://docs.streamlit.io/develop/api-reference/widgets/st.download_button)

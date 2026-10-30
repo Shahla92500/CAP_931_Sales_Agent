@@ -3,10 +3,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock
 from streamlit.testing.v1 import AppTest
-from sales_agent.models import public_url, validate_briefing, Kind
-from sales_agent.demo import demo_inputs, demo_evidence, demo_briefing
-from sales_agent.service import research, synthesize
-from sales_agent.export import pdf_bytes
+from cap_931.models import public_url, validate_briefing, Kind
+from cap_931.demo import demo_inputs, demo_evidence, demo_briefing
+from cap_931.service import research, synthesize
+from cap_931.export import pdf_bytes
 
 class SalesAgentTests(unittest.TestCase):
     def setUp(self):
@@ -61,7 +61,7 @@ class SalesAgentTests(unittest.TestCase):
         self.assertEqual(meta['cited_factual_claims'],3)
 
     def test_form_demo_and_output(self):
-        at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=25).run()
+        at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'src' / 'cap_931' / 'app.py'),default_timeout=25).run()
         self.assertFalse(at.exception)
         self.assertEqual(len(at.text_input),6)  # 4 form fields plus model and key
         at.button[0].click().run()
@@ -70,7 +70,7 @@ class SalesAgentTests(unittest.TestCase):
         self.assertIn('result',at.session_state)
 
     def test_live_empty_inputs_error(self):
-        at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=25).run()
+        at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'src' / 'cap_931' / 'app.py'),default_timeout=25).run()
         at.radio[0].set_value('Live research').run()
         at.button[0].click().run()
         self.assertTrue(at.error)
